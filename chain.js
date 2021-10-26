@@ -5,7 +5,6 @@ module.exports = class Chain {
   }
 
   if(...args) {
-    // console.log('if.b', this.operand)
     if (typeof this.operand[args[0]] === 'function') {
       const method = args.shift()
       this.operand = this.operand[method](...args) ? this.operand : undefined
@@ -14,7 +13,6 @@ module.exports = class Chain {
     const [handler, falseHandler] = typeof args[0] === 'function' && args
     this.operand = handler(this.operand) ? this.operand :
       (typeof falseHandler === 'function' ? falseHandler(this.operand) : (falseHandler || undefined))
-    // console.log('if.a', this.operand)
     return this
   }
 
@@ -33,9 +31,7 @@ module.exports = class Chain {
   }
 
   not(handler) {
-    // console.log('not.b', this.operand)
     this.operand = handler(this.operand) ? undefined : this.operand
-    // console.log('not.a', this.operand)
     return this
   }
 

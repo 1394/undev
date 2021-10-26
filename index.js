@@ -1,3 +1,4 @@
 module.exports = {
-  Chain: require('./chain')
+  Chain: require('./chain'),
+  ObjMap: require('./objmap'),
 }
