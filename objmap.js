@@ -47,6 +47,21 @@ module.exports = class ObjMap extends Parent {
     return this
   }
 
+  assemble(handler) {
+    this.operand = ObjMap.assemble(this.operand, handler)
+    return this
+  }
+
+  withFields(fields, handler) {
+    return this.assemble((p, v) => {
+      if (fields.includes(p)) {
+        return [p, handler(v, p)]
+      } else {
+        return [p, v]
+      }
+    })
+  }
+
   get(handler) {
     return typeof handler === 'function' ? handler(this.operand) : this.operand
   }

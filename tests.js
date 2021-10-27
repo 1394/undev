@@ -18,3 +18,9 @@ assert.deepEqual(
   {a: 1, c: 3, e: 445},
   'error',
 )
+
+assert.deepEqual(
+  om().withFields(['a', 'b'], (v) => v.toString()).get(),
+  {a: '1', b: '2', c: 3, d: 4, e: false},
+  'error',
+)
