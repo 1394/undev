@@ -1,9 +1,7 @@
-module.exports = class Chain {
-  constructor(operand) {
-    this.operand = operand
-    return this
-  }
+/* eslint-disable require-jsdoc */
+const Parent = require('./parent')
 
+module.exports = class Chain extends Parent {
   if(...args) {
     if (typeof this.operand[args[0]] === 'function') {
       const method = args.shift()
@@ -45,9 +43,5 @@ module.exports = class Chain {
       return this
     }
     return this
-  }
-
-  get(handler) {
-    return typeof handler === 'function' ? handler(this.operand) : this.operand
   }
 }
