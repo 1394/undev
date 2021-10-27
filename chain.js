@@ -33,9 +33,17 @@ module.exports = class Chain extends Parent {
     return this
   }
 
-  to(method, ...args) {
+  do(method, ...args) {
     if (typeof method === 'function') {
       this.operand = method(this.operand, ...args)
+      return this
+    }
+    return this
+  }
+
+  to(method, ...args) {
+    if (typeof method === 'function') {
+      this.operand = this.operand && method(this.operand, ...args)
       return this
     }
     if (this.operand && typeof this.operand[method] === 'function') {
