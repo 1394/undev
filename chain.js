@@ -11,7 +11,7 @@ const shieldWrapper = function (handler, ...args) {
 }
 
 module.exports = class Chain extends Parent {
-  // #catch = false;
+  #shieldWrapper;
   constructor(operand, opts = {}) {
     super(operand)
     this.#shieldWrapper = opts.catch && shieldWrapper
