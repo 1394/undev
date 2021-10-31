@@ -1,7 +1,22 @@
 /* eslint-disable require-jsdoc */
 const Parent = require('./parent')
 
+const shieldWrapper = function (handler, ...args) {
+  try {
+    return handler(...args)
+  } catch (ex) {
+    console.error(ex)
+    throw ex
+  }
+}
+
 module.exports = class Chain extends Parent {
+  // #catch = false;
+  constructor(operand, opts = {}) {
+    super(operand)
+    this.#shieldWrapper = opts.catch && shieldWrapper
+  }
+
   if(...args) {
     if (typeof this.operand[args[0]] === 'function') {
       const method = args.shift()
@@ -35,20 +50,33 @@ module.exports = class Chain extends Parent {
 
   do(method, ...args) {
     if (typeof method === 'function') {
-      this.operand = method(this.operand, ...args)
+      if (this.#shieldWrapper) {
+        this.operand = this.#shieldWrapper(method, this.operand, ...args)
+      } else {
+        this.operand = method(this.operand, ...args)
+      }
       return this
     }
     return this
   }
 
   to(method, ...args) {
-    if (typeof method === 'function') {
-      this.operand = this.operand && method(this.operand, ...args)
-      return this
-    }
-    if (this.operand && typeof this.operand[method] === 'function') {
-      this.operand = this.operand[method](...args)
-      return this
+    if (this.operand) {
+      if (typeof method === 'function') {
+        if (this.#shieldWrapper) {
+          this.operand = this.#shieldWrapper(method, this.operand, ...args)
+        } else {
+          this.operand = method(this.operand, ...args)
+        }
+      }
+      if (typeof this.operand[method] === 'function') {
+        if (this.#shieldWrapper) {
+          this.operand = this.#shieldWrapper(this.operand[method], ...args)
+        } else {
+          this.operand = this.operand[method](...args)
+        }
+        return this
+      }
     }
     return this
   }
