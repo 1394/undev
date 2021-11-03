@@ -59,6 +59,13 @@ module.exports = class Chain extends BaseUndev {
     return this
   }
 
+  tom(method, ...args) {
+    if (this.operand && typeof this.operand[method] === 'function') {
+      this.operand = this.operand[method](...args)
+    }
+    return this
+  }
+
   to(...args) {
     this.operand = Chain.to(this.operand, ...args)
     return this

@@ -25,3 +25,11 @@ assert.deepEqual(
   {a: '1', b: '2', c: 3, d: 4, e: false},
   'error',
 )
+
+
+assert.deepEqual(
+  Chain.from([1, 2, 3, 4, 5])
+    .tom('reduce', (acc, el) => acc + el)
+    .get(),
+  15,
+)
