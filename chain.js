@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
-const Parent = require('./parent')
+const BaseUndev = require('./baseundev')
 
-module.exports = class Chain extends Parent {
+module.exports = class Chain extends BaseUndev {
   if(...args) {
     if (typeof this.operand[args[0]] === 'function') {
       const method = args.shift()

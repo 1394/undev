@@ -1,8 +1,8 @@
 /* eslint-disable require-jsdoc */
-const Parent = require('./parent')
+const BaseUndev = require('./baseundev')
 const ArrMap = require('./arrmap')
 
-module.exports = class ObjMap extends Parent {
+module.exports = class ObjMap extends BaseUndev {
   static isObject(obj) {
     return Object.prototype.toString.call(obj) === '[object Object]'
   }

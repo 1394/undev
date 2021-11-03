@@ -2,7 +2,7 @@ const assert = require('assert')
 const ObjMap = require('./objmap')
 const Chain = require('./chain')
 
-const om = () => new ObjMap({a: 1, b: 2, c: 3, d: 4, e: false})
+const om = () => ObjMap.from({a: 1, b: 2, c: 3, d: 4, e: false})
 
 assert.deepEqual(
   om().only('a', 'c').get(),
@@ -25,5 +25,3 @@ assert.deepEqual(
   {a: '1', b: '2', c: 3, d: 4, e: false},
   'error',
 )
-
-assert.deepEqual(new Chain().to(() => []).get(), [])

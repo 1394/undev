@@ -1,8 +1,12 @@
 /* eslint-disable require-jsdoc */
-module.exports = class Parent {
+module.exports = class BaseUndev {
   constructor(operand) {
     this.operand = operand
     return this
+  }
+
+  static from(operand) {
+    return new this(operand)
   }
 
   get(handler) {

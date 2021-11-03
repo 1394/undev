@@ -4,6 +4,10 @@ class PromiseMap {
     this.promise = promise
   }
 
+  from(promise) {
+    return new PromiseMap(promise)
+  }
+
   next(fn) {
     this.promise = this.promise.then(fn)
     return this

@@ -1,7 +1,7 @@
-const Parent = require('./parent')
+const BaseUndev = require('./baseundev')
 /* eslint-disable require-jsdoc */
 
-module.exports = class ArrMap extends Parent {
+module.exports = class ArrMap extends BaseUndev {
   /**
    * build index on array elements by property
    * @function
