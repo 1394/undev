@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node tests.js",
-    "up": "git add . && git commit -m'up' && npm version patch && git push"
+    "up": "node tests.js && git add . && git commit -m'up' && npm version patch && git push"
   },
   "keywords": [],
   "author": "",
